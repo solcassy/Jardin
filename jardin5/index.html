@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CANALS — Hero Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Asset&display=swap');
+    </style>
+  <!-- Dos fuentes sencillas para principiantes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    /* Reset mínimo */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body { font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #111; }
+
+    /* Lienzo del hero */
+    .hero {
+      position: relative;
+      min-height: 750px;             /* Tamaño pedido 1440 x 750 */
+      height: 100vh;                 /* Se ve bien a pantalla completa */
+      max-height: 900px;
+      overflow: hidden;
+      background: #8db5d3;           /* Fallback color cielo */
+      background-image: url("amsterdam.png");
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Película ligera para contraste sobre la imagen */
+    .hero::after {
+      content: "";
+      position: absolute; inset: 0; 
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 100%);
+      pointer-events: none;
+    }
+
+    /* Columna lateral izquierda */
+    .rail {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 64px; background: rgba(255,255,255,0.85);
+      border-right: 1px solid #e5e5e5;
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+      padding: 16px 0; z-index: 3;
+    }
+    .burger { width: 22px; height: 2px; background: #111; position: relative; }
+    .burger::before, .burger::after { content: ""; position: absolute; left: 0; right: 0; height: 2px; background: #111; }
+    .burger::before { top: -7px; }
+    .burger::after  { top: 7px; }
+    .rail .vertical { 
+      writing-mode: vertical-rl; transform: rotate(180deg);
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #666;
+    }
+    .rail .dots { display: grid; gap: 8px; }
+    .rail .dot { width: 6px; height: 6px; border-radius: 999px; background: #111; opacity: .6; }
+
+    /* Título gigante rojo */
+    .title {
+      position: relative; z-index: 2;
+      margin: 0; 
+      padding-left: 88px;             /* dejar espacio para la rail */
+      padding-right: 24px;
+      line-height: .85;
+      text-transform: uppercase;
+      color: #e50914;                 /* rojo intenso */
+      font-family: "Asset", cursive; /* Asset font for artistic look */
+      font-size: clamp(48px, 12vw, 120px);
+      letter-spacing: .06em;
+      margin-top: 40px;
+    }
+
+    /* Texto descriptivo en esquina inferior izquierda */
+    .blurb {
+      position: absolute; left: 96px; bottom: 48px; z-index: 2;
+      max-width: 460px; color: #fff;
+      font-size: 24px; line-height: 1.25; font-weight: 400;
+      text-shadow: 0 2px 10px rgba(0,0,0,.35);
+    }
+
+    /* Pegatina roja en esquina inferior derecha (solo decoración) */
+    .sticker {
+      position: absolute; right: 32px; bottom: 32px; z-index: 2;
+      width: 160px; height: 160px; border-radius: 50%; background: #e50914;
+      display: grid; place-items: center; filter: drop-shadow(0 8px 24px rgba(0,0,0,.35));
+    }
+    .sticker span { color: #fff; font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: .12em; }
+
+    /* Contenedor para centrar el contenido en pantallas grandes */
+    .container { max-width: 1440px; margin: 0 auto; height: 100%; position: relative; }
+
+    /* Responsivo mínimo */
+    @media (max-width: 768px) {
+      .blurb { left: 84px; right: 24px; font-size: 18px; }
+      .sticker { width: 120px; height: 120px; right: 20px; bottom: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="hero">
+    <div class="container">
+      <!-- Rail izquierda -->
+      <aside class="rail" aria-label="Barra lateral">
+        <div class="burger" aria-hidden="true"></div>
+        <div class="vertical">Amsterdam</div>
+        <div class="dots" aria-hidden="true">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </aside>
+
+      <!-- Título principal -->
+      <h1 class="title">CANALS</h1>
+
+      <!-- Texto descriptivo -->
+      <p class="blurb">
+        Canals is a four part visual glimpse into the creation & history of the iconic 17th‑century canals of Amsterdam.
+      </p>
+
+      <!-- Pegatina decorativa -->
+      <div class="sticker"><span>Read ↓</span></div>
+    </div>
+  </main>
+</body>
+</html>
