@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-    </style>
   <title>Jam Area</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
     body {
       background-color: #faf8f3;
       font-family: Arial, sans-serif;
@@ -39,19 +38,28 @@
       letter-spacing: 1px;
     }
 
-    /* Imagen central simulada */
-    .card {
-      background-color: #9166ff;
-      width: 150px;
-      height: 200px;
-      margin: 50px auto;
+    /* Grid de imágenes */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      justify-items: center;
+      max-width: 1000px;
+      margin: 60px auto;
+    }
+
+    .image-grid img {
+      width: 180px;
+      height: 220px;
+      object-fit: cover;
       border-radius: 10px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-weight: bold;
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    .image-grid img:hover {
+      opacity: 1;
+      transform: scale(1.05);
     }
 
     /* Texto principal */
@@ -66,8 +74,8 @@
     .big-words {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
-      font-size: 200px;
+      margin-top: 0px;
+      font-size: 300px;
       font-weight: 900;
       font-family: 'Bebas Neue', Arial, sans-serif;
     }
@@ -90,8 +98,14 @@
 
   <h2>ESTRA SPA - VINCI LA PARTITA STRAORDINARIA</h2>
 
-  <div class="card">
-    Imagen
+  <!-- Grid con las 6 imágenes -->
+  <div class="image-grid">
+    <img src="img1.jpg" alt="img1">
+    <img src="img2.jpg" alt="img2">
+    <img src="img3.jpg" alt="img3">
+    <img src="img4.jpg" alt="img4">
+    <img src="img5.jpg" alt="img5">
+    <img src="img6.jpg" alt="img6">
   </div>
 
   <div class="info">
