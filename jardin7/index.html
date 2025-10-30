@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jam Area</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+    body {
+      background-color: #faf8f3;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+    }
+
+    /* Menú arriba */
+    .menu-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background-color: black;
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    /* Título */
+    h2 {
+      font-size: 24px;
+      margin-top: 40px;
+      letter-spacing: 1px;
+    }
+
+     /* Grid de imágenes */
+     .image-grid {
+       display: grid;
+       grid-template-columns: repeat(6, 1fr);
+       gap: 20px;
+       justify-items: center;
+       max-width: 1200px;
+       margin: 60px auto;
+     }
+
+    .image-grid img {
+      width: 180px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    .image-grid img:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    /* Texto principal */
+    .info {
+      margin-top: 40px;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.5;
+      transition: transform 0.6s ease;
+    }
+    body:has(.info:hover) .info,
+    body:has(.big-words:hover) .info {
+      transform: translateY(200px);
+    }
+
+    /* Palabras grandes abajo */
+    .big-words {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 0px;
+      font-size: 300px;
+      font-weight: 900;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+    }
+
+    /* Hover: mover hacia los lados una vez por interacción */
+    .big-words div {
+      transition: transform 0.6s ease;
+    }
+    body:has(.info:hover) .big-words div:first-child,
+    body:has(.big-words:hover) .big-words div:first-child {
+      transform: translateX(-120px);
+    }
+    body:has(.info:hover) .big-words div:last-child,
+    body:has(.big-words:hover) .big-words div:last-child {
+      transform: translateX(220px);
+    }
+
+    /* Pie de página */
+    .footer {
+      margin-top: 20px;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-bar">
+    <div><span class="dot"></span> MENU</div>
+    <div>WRITE</div>
+  </div>
+
+  <h2>ESTRA SPA - VINCI LA PARTITA STRAORDINARIA</h2>
+
+  <!-- Grid con las 6 imágenes -->
+  <div class="image-grid">
+    <img src="img1.jpg" alt="img1">
+    <img src="img2.jpg" alt="img2">
+    <img src="img3.jpg" alt="img3">
+    <img src="img4.jpg" alt="img4">
+    <img src="img5.jpg" alt="img5">
+    <img src="img6.jpg" alt="img6">
+  </div>
+
+  <div class="info">
+    © JAMAREA <br>
+    COMMUNICATION AGENCY <br>
+    BRANDING AND DIGITAL MARKETING
+  </div>
+
+  <div class="big-words">
+    <div>JAM</div>
+    <div>AREA</div>
+  </div>
+
+  <div class="footer">
+    LET’S JAM
+  </div>
+
+</body>
+</html>
