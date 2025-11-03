@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untold — Layout 1440×750</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: #f3f0e9;
+      color: #1b1b1b;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* ===== ARTBOARD CONTAINER ===== */
+    .artboard-wrapper {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .artboard {
+      width: 1440px;
+      height: 750px;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(1200px 600px at 50% 30%, rgba(0,0,0,0.04), transparent 60%), #f3f0e9;
+    }
+
+    @media (max-width: 1440px) {
+      .artboard {
+        transform: scale(calc(100vw / 1440));
+        transform-origin: top left;
+      }
+    }
+
+    /* ===== HEADER ===== */
+    .logo {
+      position: absolute;
+      left: 40px;
+      top: 36px;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .lang {
+      position: absolute;
+      right: 100px;
+      top: 40px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .menu-btn {
+      position: absolute;
+      right: 40px;
+      top: 28px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #ff5a2b;
+      border: none;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 6px 16px rgba(255,90,43,.35);
+      transition: transform .2s ease;
+    }
+
+    .menu-btn:hover {
+      transform: scale(1.06) rotate(3deg);
+    }
+
+    .menu-icon {
+      width: 18px;
+      height: 2px;
+      background: #fff;
+      position: relative;
+    }
+
+    .menu-icon::before,
+    .menu-icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #fff;
+    }
+
+    .menu-icon::before { top: -6px; }
+    .menu-icon::after { top: 6px; }
+
+    /* ===== HERO TITLE ===== */
+    .hero {
+      position: absolute;
+      left: 40%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      line-height: 0.9;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .hero .line {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    .hero .line.we-tell {
+      font-size: 164px;
+      word-spacing: 250px; /* espacio grande entre "we" y "tell" */
+    }
+
+    .hero .line.untold {
+      font-size: 220px;
+    }
+
+    .hero .line.stories {
+      font-size: 170px;
+    }
+
+    /* ===== DECORATIVE ELEMENTS ===== */
+    .asterisk {
+      position: absolute;
+      left: 320px;
+      top: 230px;
+      width: 140px;
+      height: 140px;
+      pointer-events: none;
+      z-index: 10;
+      filter: drop-shadow(0 8px 16px rgba(255,90,43,.25));
+    }
+
+    .doodle {
+      position: absolute;
+      right: 420px;
+      top: 210px;
+      width: 90px;
+      height: 150px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* ===== VIDEO CARD ===== */
+    .video-card {
+      position: absolute;
+      left: 370px;
+      top: 125px;
+      width: 320px;
+      height: 180px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      transform: translateY(-10px) rotate(-2deg);
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
+      z-index: 5;
+    }
+
+    .video-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-caption {
+      position: absolute;
+      left: 10px;
+      bottom: 6px;
+      font-size: 10px;
+      color: #fff;
+      opacity: 0.8;
+    }
+
+    /* ===== IMAGE STACK ===== */
+    .stack {
+      position: absolute;
+      left: 100px;
+      top: 470px;
+      width: 200px;
+      height: 160px;
+      perspective: 900px;
+      z-index: 5;
+    }
+
+    .card {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      transform: rotate(-6deg) translateZ(0);
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s;
+    }
+
+    .card:nth-child(2) {
+      transform: rotate(-2deg) translate(14px, 12px);
+    }
+
+    .card:nth-child(3) {
+      transform: rotate(4deg) translate(28px, 20px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .card.frame {
+      outline: 8px solid rgba(255,90,43,0.2);
+      background: rgba(255,90,43,0.13);
+      backdrop-filter: blur(0.5px);
+    }
+
+    .stack.is-hover .card {
+      transform: rotate(-3deg) translate(-8px, -8px) translateZ(40px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+
+    .stack.is-hover .card:nth-child(2) {
+      transform: rotate(0deg) translate(10px, 6px) translateZ(60px);
+    }
+
+    .stack.is-hover .card:nth-child(3) {
+      transform: rotate(6deg) translate(28px, 18px) translateZ(80px);
+    }
+
+    /* ===== ASIDE COPY ===== */
+    .aside-copy {
+      position: absolute;
+      right: 80px;
+      bottom: 160px;
+      width: 420px;
+      font-size: 16px;
+      line-height: 1.6;
+      z-index: 2;
+    }
+
+    .aside-copy b {
+      color: #ff5a2b;
+    }
+
+    /* ===== CTA BUTTON ===== */
+    .cta {
+      position: absolute;
+      left: 480px;
+      bottom: 100px;
+      z-index: 2;
+    }
+
+    .cta button {
+      border: none;
+      background: #ff5a2b;
+      color: #fff;
+      padding: 16px 28px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255,90,43,.35);
+      transition: transform .15s ease, filter .2s ease;
+    }
+
+    .cta button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    /* ===== SCROLL INDICATOR ===== */
+    .scroll {
+      position: absolute;
+      right: 34px;
+      bottom: 210px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      opacity: 0.6;
+      z-index: 2;
+    }
+
+    /* ===== DRAW LAYER (cursor trail) ===== */
+    .draw-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none; /* no bloquea interacciones */
+    }
+
+    /* ===== ACCESSIBILITY ===== */
+    :focus-visible {
+      outline: 3px solid #111;
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="artboard-wrapper">
+    <div class="artboard" role="main">
+      <!-- Header / chrome minimal -->
+      <div class="logo">untold</div>
+      <div class="lang">( EN ) ▾</div>
+      <button class="menu-btn" aria-label="Abrir menú">
+        <div class="menu-icon"></div>
+      </button>
+
+      <!-- Video/GIF card -->
+      <figure class="video-card" aria-label="GIF de portada">
+        <img src="sol.gif" alt="Animación" />
+      </figure>
+
+      <!-- Asterisco SVG naranja -->
+      <svg class="asterisk" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="#ff5a2b">
+          <rect x="44" y="5" width="12" height="90" rx="6"/>
+          <rect x="5" y="44" width="90" height="12" rx="6"/>
+          <rect x="17" y="17" width="12" height="90" rx="6" transform="rotate(-45 23 62)"/>
+          <rect x="71" y="-7" width="12" height="90" rx="6" transform="rotate(45 77 38)"/>
+        </g>
+      </svg>
+
+      <!-- Dibujo simple (SVG) -->
+      <svg class="doodle" viewBox="0 0 120 200" aria-hidden="true">
+        <rect x="10" y="20" width="70" height="130" fill="none" stroke="#1b1b1b" stroke-width="3" />
+        <circle cx="92" cy="52" r="6" fill="#1b1b1b" />
+        <path d="M90 60 L115 70 L115 120 L90 110Z" fill="#ff5a2b" />
+        <path d="M70 70 q25 10 30 38 q-8 30 -30 38 q-18 -8 -26 -34 q10 -34 26 -42Z" fill="none" stroke="#1b1b1b" stroke-width="3" />
+      </svg>
+
+      <!-- Título grande -->
+      <h1 class="hero" aria-label="We tell untold stories">
+        <span class="line we-tell">we tell</span>
+        <span class="line untold">untold</span>
+        <span class="line stories">stories</span>
+      </h1>
+
+      <!-- Pila de PNGs con hover -->
+      <div class="stack" id="pngStack" aria-label="Galería apilada">
+        <div class="card frame"></div>
+        <div class="card"><img alt="Foto 1" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=900&auto=format&fit=crop" /></div>
+        <div class="card"><img alt="Foto 2" src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?q=80&w=900&auto=format&fit=crop" /></div>
+      </div>
+
+      <!-- Copia lateral -->
+      <div class="aside-copy">
+        <b>(*)</b> We are a communications ecosystem built to rethink how communication happens. Six agencies. One integrated team.
+      </div>
+
+      <!-- CTA -->
+      <div class="cta">
+        <button type="button">• EXPLORE OUR ECOSYSTEM</button>
+      </div>
+
+      <div class="scroll">SCROLL TO DISCOVER</div>
+      <!-- Capa de dibujo para la línea naranja del cursor -->
+      <canvas class="draw-layer" width="1440" height="750" aria-hidden="true"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Image stack hover: activate 3D transformations
+    const stack = document.getElementById('pngStack');
+    stack.addEventListener('mouseenter', () => {
+      stack.classList.add('is-hover');
+    });
+    stack.addEventListener('mouseleave', () => {
+      stack.classList.remove('is-hover');
+    });
+
+    // CTA button ripple effect
+    const ctaBtn = document.querySelector('.cta button');
+    ctaBtn.addEventListener('click', (e) => {
+      const ripple = document.createElement('span');
+      const rect = e.currentTarget.getBoundingClientRect();
+      ripple.style.position = 'absolute';
+      ripple.style.left = (e.clientX - rect.left) + 'px';
+      ripple.style.top = (e.clientY - rect.top) + 'px';
+      ripple.style.width = ripple.style.height = '12px';
+      ripple.style.borderRadius = '999px';
+      ripple.style.background = 'rgba(255,255,255,.6)';
+      ripple.style.transform = 'translate(-50%, -50%)';
+      ripple.style.pointerEvents = 'none';
+      ripple.style.mixBlendMode = 'screen';
+      e.currentTarget.style.position = 'relative';
+      e.currentTarget.appendChild(ripple);
+      requestAnimationFrame(() => {
+        ripple.animate([
+          { opacity: .8, transform: 'translate(-50%,-50%) scale(1)' },
+          { opacity: 0, transform: 'translate(-50%,-50%) scale(28)' }
+        ], {
+          duration: 600,
+          easing: 'cubic-bezier(.2,.8,.2,1)'
+        }).onfinish = () => ripple.remove();
+      });
+    });
+
+    // ===== Cursor orange trail on canvas =====
+    const artboard = document.querySelector('.artboard');
+    const canvas = document.querySelector('.draw-layer');
+    const ctx = canvas.getContext('2d');
+    const points = [];
+    const maxAgeMs = 800; // cada segmento vive ~0.8s
+
+    function toCanvasCoords(evt) {
+      const rect = artboard.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      return {
+        x: (evt.clientX - rect.left) * scaleX,
+        y: (evt.clientY - rect.top) * scaleY,
+        t: performance.now()
+      };
+    }
+
+    artboard.addEventListener('mousemove', (e) => {
+      points.push(toCanvasCoords(e));
+    });
+
+    function drawTrail() {
+      const now = performance.now();
+      // eliminar puntos viejos
+      while (points.length && now - points[0].t > maxAgeMs) points.shift();
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (points.length < 2) {
+        requestAnimationFrame(drawTrail);
+        return;
+      }
+
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = 6;
+
+      for (let i = 1; i < points.length; i++) {
+        const p0 = points[i - 1];
+        const p1 = points[i];
+        const age = now - p1.t;
+        const alpha = Math.max(0, 1 - age / maxAgeMs);
+        ctx.strokeStyle = `rgba(255,90,43,${alpha.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.stroke();
+      }
+
+      requestAnimationFrame(drawTrail);
+    }
+
+    requestAnimationFrame(drawTrail);
+  </script>
+</body>
+</html>
