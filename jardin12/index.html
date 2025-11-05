@@ -8,7 +8,7 @@
   <style>
     :root{
       /* Tamaño del lienzo (como en tu práctica) */
-      --w:1440px;
+      --w:1335px;
       --h:750px;
 
       /* Colores */
@@ -41,9 +41,9 @@
     .photo-wrap{
       position:absolute;
       top:92px;
-      width:168px;       /* aprox como en el screenshot */
+      width:200px;       /* tamaño aumentado un poco */
       height:auto;
-      padding-left:10px; /* para mostrar la tirita */
+      padding-left:12px; /* para mostrar la tirita */
       border-radius:4px;
       opacity:0;
       transition:opacity .3s ease;
@@ -53,27 +53,27 @@
     /* Posiciones X diferentes para cada imagen y colores de línea diferentes */
     .photo-wrap.photo-1{
       left:36px;
-      background: linear-gradient(90deg, #b8e70e 0 10px, transparent 10px 100%);
+      background: linear-gradient(90deg, #b8e70e 0 12px, transparent 12px 100%);
     }
     .photo-wrap.photo-2{
       left:240px;
-      background: linear-gradient(90deg, #e74c3c 0 10px, transparent 10px 100%);
+      background: linear-gradient(90deg, #e74c3c 0 12px, transparent 12px 100%);
     }
     .photo-wrap.photo-3{
       left:444px;
-      background: linear-gradient(90deg, #3498db 0 10px, transparent 10px 100%);
+      background: linear-gradient(90deg, #3498db 0 12px, transparent 12px 100%);
     }
     .photo-wrap.photo-4{
       left:648px;
-      background: linear-gradient(90deg, #9b59b6 0 10px, transparent 10px 100%);
+      background: linear-gradient(90deg, #9b59b6 0 12px, transparent 12px 100%);
     }
     .photo-wrap.photo-5{
       left:852px;
-      background: linear-gradient(90deg, #f39c12 0 10px, transparent 10px 100%);
+      background: linear-gradient(90deg, #f39c12 0 12px, transparent 12px 100%);
     }
     .photo-wrap.photo-6{
       left:1056px;
-      background: linear-gradient(90deg, #1abc9c 0 10px, transparent 10px 100%);
+      background: linear-gradient(90deg, #1abc9c 0 12px, transparent 12px 100%);
     }
     
     .photo{
@@ -84,7 +84,7 @@
     }
     
     /* Mostrar imagen cuando se hace hover sobre cada frase */
-    .stage:has(.line.main:hover) .photo-wrap.photo-1{
+    .stage:has(.line.s1:hover) .photo-wrap.photo-1{
       opacity:1;
       pointer-events:auto;
     }
@@ -131,7 +131,7 @@
       align-items:flex-end;
     }
     
-    .line-row:first-child .line.main{
+    .line-row:first-child .line.s1{
       align-self:flex-end;
     }
     
@@ -147,9 +147,9 @@
       white-space:nowrap;
     }
     
-    /* Principal (negro) */
-    .line.main{
-      color:var(--text);
+    /* Principal (gris, igual que las demás) */
+    .line.s1{
+      color:var(--muted);
       font-size:48px;
     }
     
@@ -193,18 +193,15 @@
     }
 
     /* Ajuste fino de los numeritos en gris */
-    .line:not(.main) .count{ 
+    .line:not(.s1) .count{ 
       opacity:.55; 
       font-weight:600; 
     }
 
     /* (Opcional) Efecto hover suave como detalle */
     .line:hover{ 
-      color:#bfbfbf; 
+      color:#000000; 
       transition:color .2s ease; 
-    }
-    .line.main:hover{ 
-      color:#222; 
     }
   </style>
 </head>
@@ -234,7 +231,7 @@
     <div class="titles">
       <!-- Primera fila: título principal con "The Lighthouse" a la derecha -->
       <div class="line-row">
-        <span class="line main">People I Met By The Sea<span class="count">(24)</span></span>
+        <span class="line s1">People I Met By The Sea<span class="count">(24)</span></span>
         <span class="line s2">The Lighthouse<span class="count">(09)</span></span>
       </div>
       <!-- Segunda fila: "After The Sun" con "Hidden Tides" a la derecha -->
