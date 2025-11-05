@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Body of Water — Imitación</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Tamaño del lienzo (como en tu práctica) */
+      --w:1440px;
+      --h:750px;
+
+      /* Colores */
+      --bg:#ffffff;
+      --text:#0d0d0d;
+      --muted:#d9d9d9;   /* gris claro para títulos secundarios */
+      --accent:#b8e70e;  /* línea/filo verde lima junto a la foto */
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      display:grid;
+      place-items:center;
+      background:#111; /* margen exterior oscuro por si la ventana es más grande que el lienzo */
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* Lienzo fijo donde componemos todo */
+    .stage{
+      position:relative;
+      width:var(--w);
+      height:var(--h);
+      background:var(--bg);
+      overflow:hidden;
+    }
+
+    /* Foto lateral - oculta por defecto */
+    .photo-wrap{
+      position:absolute;
+      top:92px;
+      width:168px;       /* aprox como en el screenshot */
+      height:auto;
+      padding-left:10px; /* para mostrar la tirita */
+      border-radius:4px;
+      opacity:0;
+      transition:opacity .3s ease;
+      pointer-events:none;
+    }
+    
+    /* Posiciones X diferentes para cada imagen y colores de línea diferentes */
+    .photo-wrap.photo-1{
+      left:36px;
+      background: linear-gradient(90deg, #b8e70e 0 10px, transparent 10px 100%);
+    }
+    .photo-wrap.photo-2{
+      left:240px;
+      background: linear-gradient(90deg, #e74c3c 0 10px, transparent 10px 100%);
+    }
+    .photo-wrap.photo-3{
+      left:444px;
+      background: linear-gradient(90deg, #3498db 0 10px, transparent 10px 100%);
+    }
+    .photo-wrap.photo-4{
+      left:648px;
+      background: linear-gradient(90deg, #9b59b6 0 10px, transparent 10px 100%);
+    }
+    .photo-wrap.photo-5{
+      left:852px;
+      background: linear-gradient(90deg, #f39c12 0 10px, transparent 10px 100%);
+    }
+    .photo-wrap.photo-6{
+      left:1056px;
+      background: linear-gradient(90deg, #1abc9c 0 10px, transparent 10px 100%);
+    }
+    
+    .photo{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:2px;
+    }
+    
+    /* Mostrar imagen cuando se hace hover sobre cada frase */
+    .stage:has(.line.main:hover) .photo-wrap.photo-1{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .stage:has(.line.s2:hover) .photo-wrap.photo-2{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .stage:has(.line.s3:hover) .photo-wrap.photo-3{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .stage:has(.line.s4:hover) .photo-wrap.photo-4{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .stage:has(.line.s5:hover) .photo-wrap.photo-5{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .stage:has(.line.s6:hover) .photo-wrap.photo-6{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    /* Bloque de títulos centrado abajo */
+    .titles{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:120px;
+      line-height:1.05;
+    }
+
+    /* Contenedor de línea con flex para posicionar elementos horizontalmente */
+    .line-row{
+      display:flex;
+      align-items:flex-end;
+      margin-bottom:12px;
+      position:relative;
+    }
+    
+    /* Primera fila con alineación especial */
+    .line-row:first-child{
+      align-items:flex-end;
+    }
+    
+    .line-row:first-child .line.main{
+      align-self:flex-end;
+    }
+    
+    .line-row:first-child .line.s2{
+      align-self:flex-start;
+      margin-top:8px;
+    }
+
+    /* Estilo base de cada elemento de texto */
+    .line{
+      font-weight:800;
+      letter-spacing:-0.02em;
+      white-space:nowrap;
+    }
+    
+    /* Principal (negro) */
+    .line.main{
+      color:var(--text);
+      font-size:48px;
+    }
+    
+    .count{
+      font-weight:600;
+      font-size:0.6em;
+      opacity:.7;
+      margin-left:.15em;
+    }
+
+    /* Secundarias (gris claro, mismo tamaño) */
+    .line.s2{ 
+      color:var(--muted); 
+      font-size:48px; 
+      font-weight:800;
+      margin-left:50px;
+    }
+    .line.s3{ 
+      color:var(--muted); 
+      font-size:48px; 
+      font-weight:800;
+      margin-left:80px; /* indentado */
+    }
+    .line.s4{ 
+      color:var(--muted); 
+      font-size:48px; 
+      font-weight:800;
+      margin-left:50px; /* al lado de s3 */
+    }
+    .line.s5{ 
+      color:var(--muted); 
+      font-size:48px; 
+      font-weight:800;
+      margin-left:140px; /* más indentado */
+    }
+    .line.s6{ 
+      color:var(--muted); 
+      font-size:48px; 
+      font-weight:800;
+      margin-left:50px; /* al lado de s5 */
+    }
+
+    /* Ajuste fino de los numeritos en gris */
+    .line:not(.main) .count{ 
+      opacity:.55; 
+      font-weight:600; 
+    }
+
+    /* (Opcional) Efecto hover suave como detalle */
+    .line:hover{ 
+      color:#bfbfbf; 
+      transition:color .2s ease; 
+    }
+    .line.main:hover{ 
+      color:#222; 
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <!-- Fotos - aparecen con hover en cada frase -->
+    <div class="photo-wrap photo-1">
+      <img class="photo" src="img1.jpg" alt="People I Met By The Sea">
+    </div>
+    <div class="photo-wrap photo-2">
+      <img class="photo" src="img2.jpg" alt="The Lighthouse">
+    </div>
+    <div class="photo-wrap photo-3">
+      <img class="photo" src="img3.jpg" alt="After The Sun">
+    </div>
+    <div class="photo-wrap photo-4">
+      <img class="photo" src="img4.jpg" alt="Hidden Tides">
+    </div>
+    <div class="photo-wrap photo-5">
+      <img class="photo" src="img5.jpg" alt="Dead Sea With Michael">
+    </div>
+    <div class="photo-wrap photo-6">
+      <img class="photo" src="img6.jpg" alt="Closing">
+    </div>
+
+    <!-- Títulos -->
+    <div class="titles">
+      <!-- Primera fila: título principal con "The Lighthouse" a la derecha -->
+      <div class="line-row">
+        <span class="line main">People I Met By The Sea<span class="count">(24)</span></span>
+        <span class="line s2">The Lighthouse<span class="count">(09)</span></span>
+      </div>
+      <!-- Segunda fila: "After The Sun" con "Hidden Tides" a la derecha -->
+      <div class="line-row">
+        <span class="line s3">After The Sun<span class="count">(12)</span></span>
+        <span class="line s4">Hidden Tides<span class="count">(10)</span></span>
+      </div>
+      <!-- Tercera fila: "Dead Sea With Michael" con "Closing" a la derecha -->
+      <div class="line-row">
+        <span class="line s5">Dead Sea With Michael<span class="count">(10)</span></span>
+        <span class="line s6">Closing<span class="count">(09)</span></span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
