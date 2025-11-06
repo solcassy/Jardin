@@ -116,6 +116,20 @@
       .title{ margin-bottom:18px; }
       .dots{ margin-top:18px; }
     }
+
+    /* Círculo que sigue el cursor */
+    .cursor-circle{
+      position:fixed;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      border:2px solid var(--fg);
+      background:transparent;
+      pointer-events:none;
+      transform:translate(-50%, -50%);
+      z-index:9999;
+      transition:transform 0.1s ease-out;
+    }
   </style>
 </head>
 <body>
@@ -139,5 +153,16 @@
       <p class="hint">(Click anywhere for sound)</p>
     </section>
   </main>
+
+  <div class="cursor-circle"></div>
+
+  <script>
+    const cursorCircle = document.querySelector('.cursor-circle');
+    
+    document.addEventListener('mousemove', (e) => {
+      cursorCircle.style.left = e.clientX + 'px';
+      cursorCircle.style.top = e.clientY + 'px';
+    });
+  </script>
 </body>
 </html>
